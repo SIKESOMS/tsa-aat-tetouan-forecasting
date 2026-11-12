@@ -1,0 +1,2 @@
+peak_threshold_kw,n_peak_hours,baseline_MAE_peak_kw,proposed_MAE_peak_kw,baseline_MAE_offpeak_kw,proposed_MAE_offpeak_kw,peak_share_of_load_pct
+79339.5,68,2747.33,1393.68,2579.87,1089.33,134.86

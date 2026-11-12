@@ -1,0 +1,20 @@
+======================================================================
+TSA AAT — day-ahead load forecasting pipeline (rolling origin, 14 days)
+======================================================================
+1) Loading data...
+   hourly obs: 8736 | test: 336h (14 days) | actual mean 64281.7 kW
+2) Baseline SARIMA (rolling day-ahead, 120-day window) ...
+   fit 0.0s | MAE 2613.8 RMSE 3537.0 MAPE 4.24% MASE 1.145
+3) Proposed ensemble (rolling day-ahead, Fourier + GB residual + conformal) ...
+   12.0s | MAE 1150.9 RMSE 1461.8 MAPE 1.79% MASE 0.504 | coverage 100.0%
+4) Building comparison tables ...
+   point-forecast table written (5 metrics)
+   forecast_test.csv written (336 rows)
+   peak-error table written (threshold 79340 kW, n_peak 68)
+5) Generating comparison figures ...
+   E:\TSA\tsa-project\outputs\figures\fig09_forecast_comparison.png
+   E:\TSA\tsa-project\outputs\figures\fig10_interval_coverage.png
+   E:\TSA\tsa-project\outputs\figures\fig11_error_distribution.png
+   E:\TSA\tsa-project\outputs\figures\fig12_per_horizon_mae.png
+6) results -> E:\TSA\tsa-project\outputs\tables\run_results.json
+   total pipeline 103.7s

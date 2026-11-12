@@ -1,0 +1,196 @@
+{
+  "baseline": {
+    "MAE_kw": 2613.76,
+    "RMSE_kw": 3536.97,
+    "MAPE_pct": 4.24,
+    "sMAPE_pct": 4.22,
+    "MASE": 1.145,
+    "PCR_coverage_95_pct": 96.13,
+    "PCR_width_mean_kw": 16484.7,
+    "fit_time_s": 0.0,
+    "per_horizon_MAE_kw": {
+      "1": 419.6,
+      "2": 832.5,
+      "3": 1043.1,
+      "4": 1256.9,
+      "5": 1387.0,
+      "6": 1626.8,
+      "7": 2349.8,
+      "8": 3990.1,
+      "9": 4244.8,
+      "10": 3942.3,
+      "11": 3563.8,
+      "12": 3368.1,
+      "13": 3357.0,
+      "14": 3276.0,
+      "15": 3190.2,
+      "16": 3465.1,
+      "17": 3681.4,
+      "18": 3887.2,
+      "19": 3257.3,
+      "20": 2588.1,
+      "21": 2385.0,
+      "22": 2319.0,
+      "23": 1835.0,
+      "24": 1464.2
+    }
+  },
+  "proposed": {
+    "MAE_kw": 1150.92,
+    "RMSE_kw": 1461.83,
+    "MAPE_pct": 1.79,
+    "sMAPE_pct": 1.81,
+    "MASE": 0.504,
+    "anchor_MAE_kw": 1441.18,
+    "corr_MAE_kw": 1150.92,
+    "PCR_coverage_95_pct": 100.0,
+    "PCR_width_mean_kw": 17064.03,
+    "PCR_width_rel_pct": 26.55,
+    "Winkler_95_kw": 17064.03,
+    "conformal_q": 2.905,
+    "cal_norm_n": 336,
+    "fit_time_s": 13.8,
+    "meta": {
+      "model_type": "pooled",
+      "n_estimators": 300,
+      "calibration_block_hours": 336,
+      "conformal_quantile": 2.905115703840584
+    },
+    "per_horizon_MAE_kw": {
+      "1": 728.1,
+      "2": 936.8,
+      "3": 794.7,
+      "4": 858.9,
+      "5": 797.3,
+      "6": 607.2,
+      "7": 893.3,
+      "8": 1034.9,
+      "9": 819.7,
+      "10": 1074.4,
+      "11": 1338.8,
+      "12": 1517.8,
+      "13": 1473.2,
+      "14": 1542.1,
+      "15": 1519.2,
+      "16": 1229.7,
+      "17": 846.7,
+      "18": 1120.9,
+      "19": 1728.3,
+      "20": 1454.2,
+      "21": 1403.3,
+      "22": 1366.8,
+      "23": 1161.9,
+      "24": 1374.0
+    },
+    "per_horizon_anchor_MAE_kw": {
+      "1": 1336.7,
+      "2": 1185.3,
+      "3": 1034.7,
+      "4": 922.9,
+      "5": 900.9,
+      "6": 1026.7,
+      "7": 1137.3,
+      "8": 1184.5,
+      "9": 858.3,
+      "10": 939.1,
+      "11": 1306.1,
+      "12": 1524.8,
+      "13": 1449.4,
+      "14": 1449.5,
+      "15": 1423.2,
+      "16": 1675.3,
+      "17": 1613.6,
+      "18": 2138.8,
+      "19": 2039.0,
+      "20": 2144.1,
+      "21": 2199.7,
+      "22": 2028.5,
+      "23": 1715.1,
+      "24": 1354.8
+    }
+  },
+  "comparison": {
+    "point_forecast": [
+      {
+        "metric": "MAE",
+        "baseline": 2613.76,
+        "proposed": 1150.92,
+        "absolute_improvement": 1462.84,
+        "relative_improvement_pct": 55.97,
+        "better": "proposed"
+      },
+      {
+        "metric": "RMSE",
+        "baseline": 3536.97,
+        "proposed": 1461.83,
+        "absolute_improvement": 2075.14,
+        "relative_improvement_pct": 58.67,
+        "better": "proposed"
+      },
+      {
+        "metric": "MAPE",
+        "baseline": 4.24,
+        "proposed": 1.79,
+        "absolute_improvement": 2.45,
+        "relative_improvement_pct": 57.72,
+        "better": "proposed"
+      },
+      {
+        "metric": "sMAPE",
+        "baseline": 4.22,
+        "proposed": 1.81,
+        "absolute_improvement": 2.41,
+        "relative_improvement_pct": 57.16,
+        "better": "proposed"
+      },
+      {
+        "metric": "MASE",
+        "baseline": 1.15,
+        "proposed": 0.5,
+        "absolute_improvement": 0.64,
+        "relative_improvement_pct": 55.97,
+        "better": "proposed"
+      }
+    ],
+    "interval_forecast": [
+      {
+        "metric": "PCR_coverage_95",
+        "proposed": 1.0,
+        "baseline_or_note": "baseline uses Gaussian analytic CI (M2)"
+      },
+      {
+        "metric": "PCR_width_mean",
+        "proposed": 17064.0303,
+        "baseline_or_note": "baseline uses Gaussian analytic CI (M2)"
+      },
+      {
+        "metric": "PCR_width_rel",
+        "proposed": 0.2655,
+        "baseline_or_note": "baseline uses Gaussian analytic CI (M2)"
+      },
+      {
+        "metric": "Winkler_95",
+        "proposed": 17064.0303,
+        "baseline_or_note": "baseline uses Gaussian analytic CI (M2)"
+      }
+    ],
+    "n_test_hours": 336,
+    "n_origins": 14
+  },
+  "peak_error": {
+    "peak_threshold_kw": 79339.5,
+    "n_peak_hours": 68,
+    "baseline_MAE_peak_kw": 2747.33,
+    "proposed_MAE_peak_kw": 1393.68,
+    "baseline_MAE_offpeak_kw": 2579.87,
+    "proposed_MAE_offpeak_kw": 1089.33,
+    "peak_share_of_load_pct": 134.86
+  },
+  "figures": {
+    "forecast_comparison": "E:\\TSA\\tsa-project\\outputs\\figures\\fig09_forecast_comparison.png",
+    "interval_coverage": "E:\\TSA\\tsa-project\\outputs\\figures\\fig10_interval_coverage.png",
+    "error_distribution": "E:\\TSA\\tsa-project\\outputs\\figures\\fig11_error_distribution.png",
+    "per_horizon_mae": "E:\\TSA\\tsa-project\\outputs\\figures\\fig12_per_horizon_mae.png"
+  },
+  "total_seconds": 103.7
+}

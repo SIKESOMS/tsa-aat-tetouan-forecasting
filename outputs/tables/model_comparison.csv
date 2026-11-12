@@ -1,0 +1,6 @@
+metric,baseline,proposed,absolute_improvement,relative_improvement_pct,better
+MAE,2613.76,1150.92,1462.84,55.97,proposed
+RMSE,3536.97,1461.83,2075.14,58.67,proposed
+MAPE,4.24,1.79,2.45,57.72,proposed
+sMAPE,4.22,1.81,2.41,57.16,proposed
+MASE,1.15,0.5,0.64,55.97,proposed

@@ -1,0 +1,44 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+.venv/
+*.egg-info/
+dist/
+build/
+*.egg
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Virtual environments
+.env
+.env.*
+!.env.example
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Scratch / temp / debug (not part of the deliverable)
+scratch/
+*_check.txt
+*_debug.py
+build_pptx.cmd
+
+# Large/generated artifacts that are also committed elsewhere
+outputs/run_log.txt
+
+# Data - keep if small; drop if huge/private
+# data/raw/*.csv
