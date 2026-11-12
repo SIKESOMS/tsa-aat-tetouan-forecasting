@@ -143,6 +143,79 @@ def _set_col_widths(table, widths_inches):
             if i < len(row.cells):
                 row.cells[i].width = Inches(w)
 
+def _link_display_text(url: str) -> str:
+    """Return a clean display string for a URL/DOI (e.g. hide the https://doi.org/ prefix)."""
+    s = url.strip()
+    for prefix in ("https://doi.org/", "http://doi.org/", "https://dx.doi.org/", "http://dx.doi.org/"):
+        if s.lower().startswith(prefix):
+            return s[len(prefix):]
+    return s
+
+
+def _add_hyperlink(paragraph, url: str, text: str, size_pt: int = 9,
+                   bold: bool = False, color=None) -> None:
+    """Insert a clickable hyperlink (w:hyperlink with an external relationship) into a paragraph."""
+    part = paragraph.part
+    r_id = part.relate_to(url, "http://schemas.openxmlformats.org/officeDocument/2006/relationships/hyperlink",
+                          is_external=True)
+
+    hyperlink = OxmlElement("w:hyperlink")
+    hyperlink.set(qn("r:id"), r_id)
+
+    new_run = OxmlElement("w:r")
+    rPr = OxmlElement("w:rPr")
+
+    # Font
+    rFonts = OxmlElement("w:rFonts")
+    rFonts.set(qn("w:ascii"), _FONT_NAME)
+    rFonts.set(qn("w:hAnsi"), _FONT_NAME)
+    rFonts.set(qn("w:cs"), _FONT_NAME)
+    rFonts.set(qn("w:eastAsia"), _FONT_NAME)
+    rPr.append(rFonts)
+
+    # Size
+    sz = OxmlElement("w:sz")
+    sz.set(qn("w:val"), str(size_pt * 2))
+    rPr.append(sz)
+    szCs = OxmlElement("w:szCs")
+    szCs.set(qn("w:val"), str(size_pt * 2))
+    rPr.append(szCs)
+
+    if bold:
+        b = OxmlElement("w:b")
+        rPr.append(b)
+
+    if color is not None:
+        color_el = OxmlElement("w:color")
+        color_el.set(qn("w:val"), str(color))
+        rPr.append(color_el)
+    else:
+        # Typical hyperlink blue, underlined look
+        color_el = OxmlElement("w:color")
+        color_el.set(qn("w:val"), "1155CC")
+        rPr.append(color_el)
+        u = OxmlElement("w:u")
+        u.set(qn("w:val"), "single")
+        rPr.append(u)
+
+    new_run.append(rPr)
+
+    t = OxmlElement("w:t")
+    t.set(qn("xml:space"), "preserve")
+    t.text = text
+    new_run.append(t)
+
+    hyperlink.append(new_run)
+    paragraph._p.append(hyperlink)
+
+
+def _set_cell_hyperlink(cell, url: str, text: str, size_pt: int = 8) -> None:
+    """Put a clickable hyperlink as the sole content of a table cell."""
+    cell.text = ""
+    p = cell.paragraphs[0]
+    p.alignment = WD_ALIGN_PARAGRAPH.LEFT
+    _add_hyperlink(p, url, text, size_pt=size_pt, color="1155CC")
+
 
 # ------------------------------------------------------------------
 #  Build
@@ -526,11 +599,15 @@ def _add_lit_table(doc: Document) -> None:
         _set_cell_text(cells[2], r["method"], size=9)
         _set_cell_text(cells[3], r["findings"], size=9)
         _set_cell_text(cells[4], r["limitations"], size=9)
-        _set_cell_text(cells[5], r["link"], size=8)
-    _set_col_widths(table, [0.9, 2.2, 2.0, 2.0, 1.8, 1.1])
+        link = r.get("link", "")
+        if link:
+            _set_cell_hyperlink(cells[5], link, _link_display_text(link), size_pt=8)
+        else:
+            _set_cell_text(cells[5], link, size=8)
+    _set_col_widths(table, [0.9, 2.2, 2.0, 2.0, 1.8, 1.35])
     cap = doc.add_paragraph()
     cap.alignment = WD_ALIGN_PARAGRAPH.CENTER
-    cr = cap.add_run("Table 1: Summary of reviewed research papers.")
+    cr = cap.add_run("Table 1: Summary of reviewed research papers (clickable links in the last column).")
     cr.italic = True
     cr.font.size = Pt(9)
     cr.font.color.rgb = RGBColor(0x40, 0x40, 0x40)
